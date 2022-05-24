@@ -16,34 +16,50 @@
 
 def encrypt (text, n):
     
-    while text is None:
-        try: 
-            text = input('Please, insert your password: ')
-            encrypted_text = 
+    if text is None or len(text) == 0 or n <= 0:
+        return text
+    
+    for i in range(n):
+        encrypted_text = text[1::2] + text[::2]
 
-            print(encrypted_text)
-
-        except TypeError:
-            print('Input is invalid.')
-
-        except:
-            print('Something went extremely wrong.')    
+    return encrypted_text.lower()
 
 
 def decrypt (encrypted_text, n):
-    while encrypted_text is None:
-        try: 
-            encrypted_text = 
-            result_text = 
 
-            print(result_text)
+    if encrypted_text is None or len(encrypted_text) == 0 or n <= 0:
+        return encrypted_text
 
+    for i in range(n):
+        result_list = []
+        encrypted_list = list(encrypted_text)
+        
+        for j in range(len(encrypted_text)//2):
+            result_list.append( encrypted_list[j + int((len(encrypted_text) / 2))])
+            result_list.append( encrypted_list[j])
+        
+        if len(encrypted_text) % 2 == 1:
+            result_list.append( encrypted_list[len(encrypted_text) - 1])
 
-        except TypeError:
-            print('Input is invalid.')
+    result_text = ''.join(result_list)
 
-        except:
-            print('Something went extremely wrong.')    
+    return result_text
 
+# Testing the cipher No. 1
+test_text = input('Insert your password, please: ') 
+n = int(input('How many times do you wish the hash to be mixed? '))
 
-    
+print(f'Here is your password: {test_text} ciphered into {encrypt(test_text, n)} after {n} times.')
+print(f'Back to my password: {decrypt(encrypt(test_text, n), n)}')
+
+# Testing the cipher No. 2
+stats = 0
+attempts = 70
+
+for i in range(attempts):
+    test_encrypt = encrypt(test_text, i)
+
+    if test_text.lower() == decrypt(test_encrypt, i):
+        stats += 1
+
+print(f'There were successful {stats} encryptions and decryptions of {attempts} attempts.')

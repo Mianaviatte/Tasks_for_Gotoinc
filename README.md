@@ -1,7 +1,5 @@
 # Tasks for Gotoinc 
 
-Trainee Ruby on Rails Developer
-
 1. Write a simple cipher code:
 Take all even bits of the string and concatenate them with all odd n times. As a result, return the string.
 
