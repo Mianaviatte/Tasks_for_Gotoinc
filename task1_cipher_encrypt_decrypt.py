@@ -12,7 +12,7 @@
 
 # For both methods: 
 # If the input string is empty or NULL, return the input string value 
-# If n <= 0, # return the original value of the input string
+# If n <= 0, return the original value of the input string
 
 def encrypt (text, n):
     
@@ -58,8 +58,11 @@ attempts = 70
 
 for i in range(attempts):
     test_encrypt = encrypt(test_text, i)
+    test_decrypt = decrypt(test_encrypt, i)
 
-    if test_text.lower() == decrypt(test_encrypt, i):
+    if test_text.lower() == test_decrypt.lower():
         stats += 1
+    else:
+        print(f'Attempt No. {i}: gives us {test_encrypt} and returns {test_decrypt}')
 
 print(f'There were successful {stats} encryptions and decryptions of {attempts} attempts.')
